@@ -1,3 +1,7 @@
+# Eclipse metadata
+.metadata/
+.settings/
+
 # Compiled class file
 *.class
 
