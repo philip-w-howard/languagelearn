@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+<word number="singular" gender="masculine" part="noun" category="pronoun">
+  <english>he</english>
+  <french>il</french>
+</word>
+<word number="singular" gender="femine" part="noun" category="pronoun">
+  <english>she</english>
+  <french>elle</french>
+</word>
+<word number="plural" gender="masculine" part="noun" category="pronoun">
+  <english>he</english>
+  <french>ils</french>
+</word>
+<word number="plural" gender="masculine" part="noun" category="pronoun">
+  <english>she</english>
+  <french>ils</french>
+</word>
+</dictionary>
