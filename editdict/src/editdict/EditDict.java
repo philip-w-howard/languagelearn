@@ -11,6 +11,9 @@ import java.io.File;
 public class EditDict {
 
 	public static void main(String[] args) {
+		
+		WordList wordList = new WordList();
+		
 		// TODO Auto-generated method stub
 		try {
 
@@ -45,11 +48,23 @@ public class EditDict {
 					System.out.print(" category : " + eElement.getAttribute("category"));
 					System.out.print(" English : " + eElement.getElementsByTagName("english").item(0).getTextContent());
 					System.out.println(" French : " + eElement.getElementsByTagName("french").item(0).getTextContent());
+
+					//public Word(String eng, String fr, String cat, String part, String gender, String number)
+					Word word = new Word(
+							eElement.getElementsByTagName("english").item(0).getTextContent(),
+							eElement.getElementsByTagName("french").item(0).getTextContent(),
+							eElement.getAttribute("category"),
+							eElement.getAttribute("part"),
+							eElement.getAttribute("gender"),
+							eElement.getAttribute("number"));
+					wordList.add(word);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Word list:");
+		System.out.println(wordList);
 
 	}
 
