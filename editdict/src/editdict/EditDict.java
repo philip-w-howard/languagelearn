@@ -66,6 +66,7 @@ public class EditDict {
 		System.out.println("Word list:");
 		System.out.println(wordList);
 
+		EditFrame editor = new EditFrame();
 	}
 
 }
