@@ -2,6 +2,10 @@ package editdict;
 
 import javax.swing.table.AbstractTableModel;
 
+import editdict.Word.Gender_t;
+import editdict.Word.Number_t;
+import editdict.Word.SpeechPart;
+
 public class WordListTableModel extends AbstractTableModel{
 	public WordListTableModel(WordList list)
 	{
@@ -46,5 +50,51 @@ public class WordListTableModel extends AbstractTableModel{
 
 	}
 
+	@Override
+	public Class getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+
+	@Override
+    public boolean isCellEditable(int row, int col) {
+        //Note that the data/cell address is constant,
+        //no matter where the cell appears onscreen.
+        return true;
+		/*
+		if (col < 2) {
+            return false;
+        } else {
+            return true;
+        }
+        */
+    }
+	
+	@Override
+    public void setValueAt(Object value, int row, int col) {
+		Word item = m_wordList.get(row);
+		switch (col)
+		{
+		case 0:
+			item.english = (String) value;
+			break;
+		case 1:
+			item.french = (String) value;
+			break;
+		case 2:
+			item.number = (Number_t) value;
+			break;
+		case 3:
+			item.gender = (Gender_t) value;
+			break;
+		case 4:
+			item.part = (SpeechPart) value;
+			break;
+		case 5:
+			item.category = (String) value;
+			break;
+		}
+
+		fireTableCellUpdated(row, col);
+    }
 
 }

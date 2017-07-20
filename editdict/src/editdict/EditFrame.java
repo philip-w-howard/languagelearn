@@ -8,6 +8,8 @@ import java.awt.Label;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -19,6 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
 
 public class EditFrame extends JFrame {
 
@@ -187,6 +190,7 @@ public class EditFrame extends JFrame {
 			}
 			m_wordTable = new JTable(new WordListTableModel(list));
 			m_wordTable.setFillsViewportHeight(true);
+			m_wordTable.setAutoCreateRowSorter(true);
 			ListSelectionModel listSelectionModel;
 			listSelectionModel = m_wordTable.getSelectionModel();
 			listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -198,6 +202,33 @@ public class EditFrame extends JFrame {
 			JScrollPane scrollPane = new JScrollPane(m_wordTable);
 			add(scrollPane, c);
 
+			//***************************************
+			TableColumn numberColumn = m_wordTable.getColumnModel().getColumn(2);
+
+			JComboBox<Word.Number_t> numberBox = new JComboBox<Word.Number_t>();
+			for (Word.Number_t number : Word.Number_t.values())
+			{
+				numberBox.addItem(number);
+			}
+			numberColumn.setCellEditor(new DefaultCellEditor(numberBox));
+
+			TableColumn genderColumn = m_wordTable.getColumnModel().getColumn(3);
+
+			JComboBox<Word.Gender_t> genderBox = new JComboBox<Word.Gender_t>();
+			for (Word.Gender_t gender : Word.Gender_t.values())
+			{
+				genderBox.addItem(gender);
+			}
+			genderColumn.setCellEditor(new DefaultCellEditor(genderBox));
+			
+			TableColumn partColumn = m_wordTable.getColumnModel().getColumn(4);
+
+			JComboBox<Word.SpeechPart> partBox = new JComboBox<Word.SpeechPart>();
+			for (Word.SpeechPart part : Word.SpeechPart.values())
+			{
+				partBox.addItem(part);
+			}
+			partColumn.setCellEditor(new DefaultCellEditor(partBox));
 		}
 		
 		@Override
@@ -217,9 +248,9 @@ public class EditFrame extends JFrame {
 			else if (m_word.gender == Word.Gender_t.feminine)
 				m_feminine.setSelected(true);
 			
-			if (m_word.part == Word.SpeachPart_t.noun)
+			if (m_word.part == Word.SpeechPart.noun)
 				m_noun.setSelected(true);
-			else if (m_word.part == Word.SpeachPart_t.verb)
+			else if (m_word.part == Word.SpeechPart.verb)
 				m_verb.setSelected(true);
 
 			super.paintComponent(g);
