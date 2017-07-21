@@ -20,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
@@ -40,7 +42,7 @@ public class EditFrame extends JFrame {
 		setVisible(true);
 	}
 
-	protected class EditPanel extends JPanel
+	protected class EditPanel extends JPanel implements TableModelListener
 	{
 		private static final long serialVersionUID = 9071674198967674856L;
 		protected Word m_word;
@@ -191,6 +193,7 @@ public class EditFrame extends JFrame {
 			m_wordTable = new JTable(new WordListTableModel(list));
 			m_wordTable.setFillsViewportHeight(true);
 			m_wordTable.setAutoCreateRowSorter(true);
+			m_wordTable.getModel().addTableModelListener(this);
 			ListSelectionModel listSelectionModel;
 			listSelectionModel = m_wordTable.getSelectionModel();
 			listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -260,28 +263,6 @@ public class EditFrame extends JFrame {
 			public void valueChanged(ListSelectionEvent e) { 
 				ListSelectionModel lsm = (ListSelectionModel)e.getSource();
 
-				/*
-				int firstIndex = e.getFirstIndex();
-				int lastIndex = e.getLastIndex();
-				boolean isAdjusting = e.getValueIsAdjusting(); 
-				System.out.println("Event for indexes "
-						+ firstIndex + " - " + lastIndex
-						+ "; isAdjusting is " + isAdjusting
-						+ "; selected indexes:");
-
-				if (lsm.isSelectionEmpty()) {
-					System.out.println(" <none>");
-				} else {
-					// Find out which indexes are selected.
-					int minIndex = lsm.getMinSelectionIndex();
-					int maxIndex = lsm.getMaxSelectionIndex();
-					for (int i = minIndex; i <= maxIndex; i++) {
-						if (lsm.isSelectedIndex(i)) {
-							System.out.println(" " + i);
-						}
-					}
-				}
-				*/
 				if (!e.getValueIsAdjusting())
 				{
 					int minIndex = lsm.getMinSelectionIndex();
@@ -298,6 +279,11 @@ public class EditFrame extends JFrame {
 				}
 			}
 
+		}
+
+		@Override
+		public void tableChanged(TableModelEvent arg0) {
+			repaint();		
 		}
 	}
 }
