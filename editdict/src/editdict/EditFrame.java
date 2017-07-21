@@ -5,10 +5,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -56,6 +59,9 @@ public class EditFrame extends JFrame {
 		protected JRadioButton m_feminine;
 		protected JRadioButton m_noun;
 		protected JRadioButton m_verb;
+		protected ButtonGroup numberGroup;
+		protected ButtonGroup genderGroup;
+		protected ButtonGroup partGroup;
 		protected JTable m_wordTable;
 		
 		public EditPanel(WordList list)
@@ -113,7 +119,7 @@ public class EditFrame extends JFrame {
 			m_plural = new JRadioButton("plural");
 			add(m_plural, c);
 
-			ButtonGroup numberGroup = new ButtonGroup();
+			numberGroup = new ButtonGroup();
 			numberGroup.add(m_singular);
 			numberGroup.add(m_plural);
 
@@ -134,7 +140,7 @@ public class EditFrame extends JFrame {
 			m_feminine = new JRadioButton("feminine");
 			add(m_feminine, c);
 
-			ButtonGroup genderGroup = new ButtonGroup();
+			genderGroup = new ButtonGroup();
 			genderGroup.add(m_masculine);
 			genderGroup.add(m_feminine);
 
@@ -155,7 +161,7 @@ public class EditFrame extends JFrame {
 			m_verb = new JRadioButton("verb");
 			add(m_verb, c);
 
-			ButtonGroup partGroup = new ButtonGroup();
+			partGroup = new ButtonGroup();
 			partGroup.add(m_noun);
 			partGroup.add(m_verb);
 
@@ -179,6 +185,16 @@ public class EditFrame extends JFrame {
 			//***************************************
 			c.gridx = 0;
 			c.gridy = 4;
+			c.fill = GridBagConstraints.NONE;
+			c.weightx = 0;
+			c.weighty = 0;
+			JButton add = new JButton("Add Row");
+			add.addActionListener(new addRowListener()); 
+			add(add, c);
+			
+			//** Data Table *************************************
+			c.gridx = 0;
+			c.gridy = 5;
 			c.fill = GridBagConstraints.BOTH;
 			c.weightx = 1;
 			c.weighty = 1;
@@ -234,12 +250,27 @@ public class EditFrame extends JFrame {
 			partColumn.setCellEditor(new DefaultCellEditor(partBox));
 		}
 		
+		protected class addRowListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e) {
+				WordListTableModel model = (WordListTableModel) m_wordTable.getModel();
+				Word newWord = new Word();
+				m_wordList.add(newWord);
+				model.addRow(newWord);
+				m_wordTable.setRowSelectionInterval(m_wordList.size()-1, m_wordList.size()-1);
+			}	
+		}
+		
 		@Override
 		protected void paintComponent(Graphics g)
 		{
 			m_English.setText(m_word.english);
 			m_French.setText(m_word.french);
 			m_category.setText(m_word.category);
+			
+			numberGroup.clearSelection();
+			genderGroup.clearSelection();
+			partGroup.clearSelection();
 			
 			if (m_word.number == Word.Number_t.singular)
 				m_singular.setSelected(true);

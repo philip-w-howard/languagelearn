@@ -1,33 +1,21 @@
 package editdict;
 
-import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import editdict.Word.Gender_t;
 import editdict.Word.Number_t;
 import editdict.Word.SpeechPart;
 
-public class WordListTableModel extends AbstractTableModel{
+public class WordListTableModel extends DefaultTableModel{
 	public WordListTableModel(WordList list)
 	{
+		super(colNames,list.size());
 		m_wordList = list;
 	}
 	protected WordList m_wordList;
-	protected String[] colNames = {"English", "French", "Number", "Gender", "Part", "Category"};
+	static protected String[] colNames = {"English", "French", "Number", "Gender", "Part", "Category"};
 	private static final long serialVersionUID = 7754700570472658260L;
 
-	@Override
-	public String getColumnName(int col)
-	{
-		return colNames[col];
-	}
-	@Override
-	public int getColumnCount() {
-		return 6;
-	}
-	@Override
-	public int getRowCount() {
-		return m_wordList.size();
-	}
 	@Override
 	public Object getValueAt(int row, int col) {
 		Word item = m_wordList.get(row);
@@ -50,6 +38,13 @@ public class WordListTableModel extends AbstractTableModel{
 
 	}
 
+	public void addRow(Word word)
+	{
+		Object[] rowData = {word.english, word.french, word.number, word.gender, word.part, word.category};
+		addRow(rowData);
+		System.out.println("Added a row");
+	}
+	
 	@Override
 	public Class getColumnClass(int c) {
         return getValueAt(0, c).getClass();

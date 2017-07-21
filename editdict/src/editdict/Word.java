@@ -10,6 +10,17 @@ public class Word {
 		this.gender = Gender_t.valueOf(gender);
 		this.number = Number_t.valueOf(number);
 	}
+	
+	public Word()
+	{
+		this.english = "";
+		this.french = "";
+		this.category = "Unspecified";
+		this.part = SpeechPart.none;
+		this.gender = Gender_t.none;
+		this.number = Number_t.none;
+	}
+	
 	public String toString()
 	{
 		return "<word number=\"" + number + "\" gender=\"" + gender + "\" part=\"" + part +"\" " +
@@ -18,9 +29,9 @@ public class Word {
 	           "<french>" + french + "</french>\n" +
 	           "</word>\n";
 	}
-	public enum Number_t { singular, plural };
-	public enum Gender_t { masculine, feminine };
-	public enum SpeechPart { noun, verb };
+	public enum Number_t {none, singular, plural};
+	public enum Gender_t {none, masculine, feminine };
+	public enum SpeechPart {none, noun, verb };
 	
 	public Number_t number;
 	public Gender_t gender;
