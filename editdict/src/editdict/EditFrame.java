@@ -35,19 +35,20 @@ public class EditFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public EditFrame(WordList list)
+	public EditFrame(String filename)
 	{
 		setSize(600,400);
 		setTitle("Language Word Editor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		add(new EditPanel(list));
+		add(new EditPanel(filename));
 		setVisible(true);
 	}
 
 	protected class EditPanel extends JPanel implements TableModelListener
 	{
 		private static final long serialVersionUID = 9071674198967674856L;
+		protected String m_filename;
 		protected Word m_word;
 		protected WordList m_wordList;
 		protected JTextField m_English;
@@ -64,9 +65,11 @@ public class EditFrame extends JFrame {
 		protected ButtonGroup partGroup;
 		protected JTable m_wordTable;
 		
-		public EditPanel(WordList list)
+		public EditPanel(String filename)
 		{
-			m_wordList = list;
+			m_filename = filename;
+			m_wordList = new WordList();
+			m_wordList.load(filename);
 			m_word = m_wordList.get(0);
 			
 			GridBagLayout layout = new GridBagLayout();
@@ -189,8 +192,19 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.weighty = 0;
 			JButton add = new JButton("Add Row");
+			add.setMnemonic(java.awt.event.KeyEvent.VK_I);
 			add.addActionListener(new addRowListener()); 
 			add(add, c);
+			
+			//***************************************
+			c.gridx = 2;
+			c.gridy = 4;
+			c.fill = GridBagConstraints.NONE;
+			c.weightx = 0;
+			c.weighty = 0;
+			JButton savebtn = new JButton("Save");
+			savebtn.addActionListener(new saveListener()); 
+			add(savebtn, c);
 			
 			//** Data Table *************************************
 			c.gridx = 0;
@@ -206,7 +220,7 @@ public class EditFrame extends JFrame {
 			{
 				colNames.add(item);
 			}
-			m_wordTable = new JTable(new WordListTableModel(list));
+			m_wordTable = new JTable(new WordListTableModel(m_wordList));
 			m_wordTable.setFillsViewportHeight(true);
 			m_wordTable.setAutoCreateRowSorter(true);
 			m_wordTable.getModel().addTableModelListener(this);
@@ -258,6 +272,13 @@ public class EditFrame extends JFrame {
 				m_wordList.add(newWord);
 				model.addRow(newWord);
 				m_wordTable.setRowSelectionInterval(m_wordList.size()-1, m_wordList.size()-1);
+			}	
+		}
+		
+		protected class saveListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e) {
+				m_wordList.save(m_filename);
 			}	
 		}
 		

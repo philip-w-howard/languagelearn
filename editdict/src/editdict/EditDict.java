@@ -12,61 +12,9 @@ public class EditDict {
 
 	public static void main(String[] args) {
 		
-		WordList wordList = new WordList();
-		
-		// TODO Auto-generated method stub
-		try {
+		String filename = "/Users/philhow/Documents/GitHub/languagelearn/vocab.xml";
 
-			File fXmlFile = new File("/Users/philhow/Documents/GitHub/languagelearn/vocab.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-
-			//optional, but recommended
-			//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-			doc.getDocumentElement().normalize();
-
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-			NodeList nList = doc.getElementsByTagName("word");
-
-			System.out.println("----------------------------");
-
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-
-				Node nNode = nList.item(temp);
-
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-					Element eElement = (Element) nNode;
-
-					System.out.print("Number : " + eElement.getAttribute("number"));
-					System.out.print(" Gender : " + eElement.getAttribute("gender"));
-					System.out.print(" part : " + eElement.getAttribute("part"));
-					System.out.print(" category : " + eElement.getAttribute("category"));
-					System.out.print(" English : " + eElement.getElementsByTagName("english").item(0).getTextContent());
-					System.out.println(" French : " + eElement.getElementsByTagName("french").item(0).getTextContent());
-
-					//public Word(String eng, String fr, String cat, String part, String gender, String number)
-					Word word = new Word(
-							eElement.getElementsByTagName("english").item(0).getTextContent(),
-							eElement.getElementsByTagName("french").item(0).getTextContent(),
-							eElement.getAttribute("category"),
-							eElement.getAttribute("part"),
-							eElement.getAttribute("gender"),
-							eElement.getAttribute("number"));
-					wordList.add(word);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("Word list:");
-		System.out.println(wordList);
-
-		EditFrame editor = new EditFrame(wordList);
+		EditFrame editor = new EditFrame(filename);
 	}
 
 }

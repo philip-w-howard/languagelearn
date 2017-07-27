@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dictionary>
 <word number="singular" gender="masculine" part="noun" category="pronoun">
-  <english>he</english>
-  <french>il</french>
+<english>he</english>
+<french>il</french>
 </word>
 <word number="singular" gender="feminine" part="noun" category="pronoun">
-  <english>she</english>
-  <french>elle</french>
+<english>she</english>
+<french>elle</french>
 </word>
 <word number="plural" gender="masculine" part="noun" category="pronoun">
-  <english>he</english>
-  <french>ils</french>
+<english>he</english>
+<french>ils</french>
 </word>
 <word number="plural" gender="masculine" part="noun" category="pronoun">
-  <english>she</english>
-  <french>ils</french>
+<english>she</english>
+<french>ils</french>
+</word>
+<word number="singular" gender="feminine" part="noun" category="Unspecified">
+<english>girl</english>
+<french>fille</french>
 </word>
 </dictionary>
+

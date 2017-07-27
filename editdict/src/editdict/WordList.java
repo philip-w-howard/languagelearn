@@ -1,6 +1,17 @@
 package editdict;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Vector;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class WordList extends Vector<Word>{
 	public WordList()
@@ -25,13 +36,82 @@ public class WordList extends Vector<Word>{
 		return false;
 	}
 	
+	public void load(String filename)
+	{
+		// TODO Auto-generated method stub
+		try {
+
+			File fXmlFile = new File(filename);
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+
+			//optional, but recommended
+			//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+			doc.getDocumentElement().normalize();
+
+//			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+			NodeList nList = doc.getElementsByTagName("word");
+
+//			System.out.println("----------------------------");
+
+			for (int temp = 0; temp < nList.getLength(); temp++) {
+
+				Node nNode = nList.item(temp);
+
+//				System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element eElement = (Element) nNode;
+
+/*
+					System.out.print("Number : " + eElement.getAttribute("number"));
+					System.out.print(" Gender : " + eElement.getAttribute("gender"));
+					System.out.print(" part : " + eElement.getAttribute("part"));
+					System.out.print(" category : " + eElement.getAttribute("category"));
+					System.out.print(" English : " + eElement.getElementsByTagName("english").item(0).getTextContent());
+					System.out.println(" French : " + eElement.getElementsByTagName("french").item(0).getTextContent());
+ */
+
+					//public Word(String eng, String fr, String cat, String part, String gender, String number)
+					Word word = new Word(
+							eElement.getElementsByTagName("english").item(0).getTextContent(),
+							eElement.getElementsByTagName("french").item(0).getTextContent(),
+							eElement.getAttribute("category"),
+							eElement.getAttribute("part"),
+							eElement.getAttribute("gender"),
+							eElement.getAttribute("number"));
+					this.add(word);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void save(String filename)
+	{
+		try{
+		    PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		    writer.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		    writer.println(toString());
+		    writer.close();
+		} catch (IOException e) {
+		   // do something
+		}
+	}
+	
 	public String toString()
 	{
-		String result = new String();
+		String result = new String("<dictionary>\n");
 		for (Word item : this)
 		{
 			result += item;
 		}
+		
+		result += "</dictionary>\n";
 		
 		return result;
 	}
