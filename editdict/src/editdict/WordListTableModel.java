@@ -13,6 +13,8 @@ public class WordListTableModel extends DefaultTableModel{
 		m_wordList = list;
 	}
 	protected WordList m_wordList;
+	protected Boolean m_modified = false;
+	
 	static protected String[] colNames = {"English", "French", "Number", "Gender", "Part", "Category"};
 	private static final long serialVersionUID = 7754700570472658260L;
 
@@ -42,7 +44,8 @@ public class WordListTableModel extends DefaultTableModel{
 	{
 		Object[] rowData = {word.english, word.french, word.number, word.gender, word.part, word.category};
 		addRow(rowData);
-		System.out.println("Added a row");
+		m_wordList.add(word);
+		m_modified = true;
 	}
 	
 	@Override
@@ -89,7 +92,22 @@ public class WordListTableModel extends DefaultTableModel{
 			break;
 		}
 
+		m_modified = true;
 		fireTableCellUpdated(row, col);
     }
 
+	public void save(String filename)
+	{
+		m_wordList.save(filename);
+	}
+	
+	public void set(int index, Word word)
+	{
+		if (index >= 0)	m_wordList.set(index,  word);
+	}
+	
+	public Word get(int index)
+	{
+		return m_wordList.get(index);
+	}
 }

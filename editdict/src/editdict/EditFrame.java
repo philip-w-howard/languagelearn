@@ -1,5 +1,6 @@
 package editdict;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,6 +8,10 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
@@ -14,7 +19,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -25,7 +30,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
 public class EditFrame extends JFrame {
@@ -35,22 +39,45 @@ public class EditFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	protected EditPanel m_editPanel;
 	public EditFrame(String filename)
 	{
 		setSize(600,400);
 		setTitle("Language Word Editor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		 
 
-		add(new EditPanel(filename));
+		m_editPanel = new EditPanel(filename);
+		add(m_editPanel);
 		setVisible(true);
+		addWindowListener(new closeListener(this));
 	}
 
+	protected class closeListener extends WindowAdapter
+	{
+		public closeListener(Component comp)
+		{
+			m_component = comp;
+		}
+		
+		protected Component m_component;
+		
+		@Override
+		public void windowClosing(WindowEvent arg0) {
+			int opt = JOptionPane.showConfirmDialog(m_component, "Save file?", "Save file?", JOptionPane.YES_NO_OPTION);
+			if (opt == JOptionPane.YES_OPTION)
+			{
+				m_editPanel.save();
+			}
+		}
+	}
+	
 	protected class EditPanel extends JPanel implements TableModelListener
 	{
 		private static final long serialVersionUID = 9071674198967674856L;
 		protected String m_filename;
 		protected Word m_word;
-		protected WordList m_wordList;
 		protected JTextField m_English;
 		protected JTextField m_French;
 		protected JTextField m_category;
@@ -63,14 +90,14 @@ public class EditFrame extends JFrame {
 		protected ButtonGroup numberGroup;
 		protected ButtonGroup genderGroup;
 		protected ButtonGroup partGroup;
+		protected WordListTableModel m_model; 
 		protected JTable m_wordTable;
 		
 		public EditPanel(String filename)
 		{
 			m_filename = filename;
-			m_wordList = new WordList();
-			m_wordList.load(filename);
-			m_word = m_wordList.get(0);
+			
+			editListener my_editListener = new editListener();
 			
 			GridBagLayout layout = new GridBagLayout();
 			setLayout(layout);
@@ -88,6 +115,8 @@ public class EditFrame extends JFrame {
 			c.gridwidth = 3;
 			c.weightx = 1;
 			m_English = new JTextField();
+			m_English.addActionListener(my_editListener);
+			m_English.addFocusListener(my_editListener);
 			add(m_English, c);
 
 			c.gridx = 0;
@@ -102,6 +131,8 @@ public class EditFrame extends JFrame {
 			c.gridwidth = 3;
 			c.weightx = 1;
 			m_French = new JTextField();
+			m_French.addActionListener(my_editListener);
+			m_French.addFocusListener(my_editListener);
 			add(m_French, c);	
 
 			//***************************************
@@ -112,6 +143,7 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.anchor = GridBagConstraints.WEST;
 			m_singular = new JRadioButton("singular");
+			m_singular.addActionListener(my_editListener);
 			add(m_singular, c);
 
 			c.gridx = 0;
@@ -120,6 +152,7 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.anchor = GridBagConstraints.WEST;
 			m_plural = new JRadioButton("plural");
+			m_plural.addActionListener(my_editListener);
 			add(m_plural, c);
 
 			numberGroup = new ButtonGroup();
@@ -133,6 +166,7 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.anchor = GridBagConstraints.WEST;
 			m_masculine = new JRadioButton("masculine");
+			m_masculine.addActionListener(my_editListener);
 			add(m_masculine, c);
 
 			c.gridx = 1;
@@ -141,6 +175,7 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.anchor = GridBagConstraints.WEST;
 			m_feminine = new JRadioButton("feminine");
+			m_feminine.addActionListener(my_editListener);
 			add(m_feminine, c);
 
 			genderGroup = new ButtonGroup();
@@ -154,6 +189,7 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.anchor = GridBagConstraints.WEST;
 			m_noun = new JRadioButton("noun");
+			m_noun.addActionListener(my_editListener);
 			add(m_noun, c);
 
 			c.gridx = 2;
@@ -162,6 +198,7 @@ public class EditFrame extends JFrame {
 			c.weightx = 0;
 			c.anchor = GridBagConstraints.WEST;
 			m_verb = new JRadioButton("verb");
+			m_verb.addActionListener(my_editListener);
 			add(m_verb, c);
 
 			partGroup = new ButtonGroup();
@@ -183,6 +220,8 @@ public class EditFrame extends JFrame {
 			c.anchor = GridBagConstraints.WEST;
 			c.weightx = 1;
 			m_category = new JTextField();
+			m_category.addActionListener(my_editListener);
+			m_category.addFocusListener(my_editListener);
 			add(m_category, c);	
 
 			//***************************************
@@ -220,7 +259,11 @@ public class EditFrame extends JFrame {
 			{
 				colNames.add(item);
 			}
-			m_wordTable = new JTable(new WordListTableModel(m_wordList));
+			WordList wordList = new WordList();
+			wordList.load(filename);
+			m_word = wordList.get(0);
+			m_model = new WordListTableModel(wordList);
+			m_wordTable = new JTable(m_model);
 			m_wordTable.setFillsViewportHeight(true);
 			m_wordTable.setAutoCreateRowSorter(true);
 			m_wordTable.getModel().addTableModelListener(this);
@@ -267,21 +310,77 @@ public class EditFrame extends JFrame {
 		protected class addRowListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e) {
-				WordListTableModel model = (WordListTableModel) m_wordTable.getModel();
 				Word newWord = new Word();
-				m_wordList.add(newWord);
-				model.addRow(newWord);
-				m_wordTable.setRowSelectionInterval(m_wordList.size()-1, m_wordList.size()-1);
+				m_model.addRow(newWord);
+				m_wordTable.setRowSelectionInterval(m_model.getRowCount()-1, m_model.getRowCount()-1);
+				m_English.requestFocus();
+				repaint();
 			}	
+		}
+		
+		public void save()
+		{
+			m_model.save(m_filename);;
 		}
 		
 		protected class saveListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e) {
-				m_wordList.save(m_filename);
+				save();
 			}	
 		}
 		
+		protected class editListener implements ActionListener, FocusListener
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("ActionPerformed");
+				update();
+			}
+			
+			protected void update()
+			{
+				m_word.english = m_English.getText();
+				m_word.french = m_French.getText();
+				m_word.category = m_category.getText();
+				
+				if (m_singular.isSelected())
+					m_word.number = Word.Number_t.singular;
+				else if (m_plural.isSelected())
+					m_word.number = Word.Number_t.plural;
+				else
+					m_word.number = Word.Number_t.none;
+				
+				if (m_masculine.isSelected())
+					m_word.gender = Word.Gender_t.masculine;
+				else if (m_feminine.isSelected())
+					m_word.gender = Word.Gender_t.feminine;
+				else
+					m_word.gender = Word.Gender_t.none;
+				
+				if (m_noun.isSelected())
+					m_word.part = Word.SpeechPart.noun;
+				else if (m_verb.isSelected())
+					m_word.part = Word.SpeechPart.verb;
+				else
+					m_word.part = Word.SpeechPart.none;
+				
+				m_model.set(m_wordTable.getSelectedRow(), m_word);
+				repaint();
+				System.out.println("Updated item");
+			}
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				System.out.println("focusLost");
+				update();
+			}
+		}
 		@Override
 		protected void paintComponent(Graphics g)
 		{
@@ -321,8 +420,7 @@ public class EditFrame extends JFrame {
 					int maxIndex = lsm.getMaxSelectionIndex();
 					for (int i = minIndex; i <= maxIndex; i++) {
 						if (lsm.isSelectedIndex(i)) {
-							System.out.println("selected: " + i);
-							m_word = m_wordList.get(i);
+							m_word = m_model.get(i);
 							break;
 						}
 					}
