@@ -50,6 +50,8 @@ public class EditFrame extends JFrame {
 
 		m_editPanel = new EditPanel(filename);
 		add(m_editPanel);
+		
+		setJMenuBar(new EditMenu());
 		setVisible(true);
 		addWindowListener(new closeListener(this));
 	}
@@ -97,6 +99,12 @@ public class EditFrame extends JFrame {
 		{
 			m_filename = filename;
 			
+			WordFormat wordFormat = new WordFormat();
+			wordFormat.load(m_filename);
+			
+			WordList wordList = new WordList(wordFormat);
+			wordList.load(m_filename);
+
 			editListener my_editListener = new editListener();
 			
 			GridBagLayout layout = new GridBagLayout();
@@ -259,8 +267,6 @@ public class EditFrame extends JFrame {
 			{
 				colNames.add(item);
 			}
-			WordList wordList = new WordList();
-			wordList.load(filename);
 			m_word = wordList.get(0);
 			m_model = new WordListTableModel(wordList);
 			m_wordTable = new JTable(m_model);

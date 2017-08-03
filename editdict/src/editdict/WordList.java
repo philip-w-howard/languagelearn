@@ -2,7 +2,6 @@ package editdict;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,8 +13,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class WordList extends Vector<Word>{
-	public WordList()
+	public WordFormat m_format;
+	
+	public WordList(WordFormat format)
 	{
+		m_format = format;
 	}
 	
 	public boolean containsEnglish(String english)
@@ -76,7 +78,10 @@ public class WordList extends Vector<Word>{
 		try{
 		    PrintWriter writer = new PrintWriter(filename, "UTF-8");
 		    writer.println("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+		    writer.println("<dictionary>");
+		    writer.println(m_format);
 		    writer.println(toString());
+		    writer.println("</dictionary>");
 		    writer.close();
 		} catch (IOException e) {
 		   // do something
@@ -85,13 +90,13 @@ public class WordList extends Vector<Word>{
 	
 	public String toString()
 	{
-		String result = new String("<dictionary>\n");
+		String result = new String("<wordlist>\n");
 		for (Word item : this)
 		{
 			result += item;
 		}
 		
-		result += "</dictionary>\n";
+		result += "</wordlist>\n";
 		
 		return result;
 	}
