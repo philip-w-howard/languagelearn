@@ -15,10 +15,10 @@ import org.w3c.dom.NodeList;
 
 public class WordFormat 
 {
-	public List<String> gender;
-	public List<String> number;
-	public List<String> part;
-	public List<String> verbNumber;
+	protected List<String> gender;
+	protected List<String> number;
+	protected List<String> part;
+	protected List<String> verbNumber;
 	
 	public WordFormat()
 	{
@@ -27,6 +27,11 @@ public class WordFormat
 		part = new ArrayList<String>();
 		verbNumber = new ArrayList<String>();
 	}
+	
+	public List<String> Genders() { return gender; }
+	public List<String> Numbers() { return number; }
+	public List<String> Parts() { return part; }
+	public List<String> VerbNumbers() { return verbNumber; }
 	
 	public void load(String filename) {
 		try {

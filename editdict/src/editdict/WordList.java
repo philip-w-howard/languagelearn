@@ -2,6 +2,7 @@ package editdict;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,7 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class WordList extends Vector<Word>{
-	public WordFormat m_format;
+	protected WordFormat m_format;
 	
 	public WordList(WordFormat format)
 	{
@@ -64,7 +65,8 @@ public class WordList extends Vector<Word>{
 							eElement.getAttribute("category"),
 							eElement.getAttribute("part"),
 							eElement.getAttribute("gender"),
-							eElement.getAttribute("number"));
+							eElement.getAttribute("number"),
+							eElement.getAttribute("verbNumber"));
 					this.add(word);
 				}
 			}
@@ -100,4 +102,10 @@ public class WordList extends Vector<Word>{
 		
 		return result;
 	}
+	
+	public List<String> Genders() { return m_format.Genders(); }
+	public List<String> Numbers() { return m_format.Numbers(); }
+	public List<String> Parts() { return m_format.Parts(); }
+	public List<String> VerbNumbers() { return m_format.VerbNumbers(); }
+
 }

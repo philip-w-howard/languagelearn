@@ -4,7 +4,8 @@ import javax.swing.table.DefaultTableModel;
 
 import editdict.Word.Gender_t;
 import editdict.Word.Number_t;
-import editdict.Word.SpeechPart;
+import editdict.Word.SpeechPart_t;
+import editdict.Word.VerbNumber_t;
 
 public class WordListTableModel extends DefaultTableModel{
 	public WordListTableModel(WordList list)
@@ -15,7 +16,7 @@ public class WordListTableModel extends DefaultTableModel{
 	protected WordList m_wordList;
 	protected Boolean m_modified = false;
 	
-	static protected String[] colNames = {"English", "French", "Number", "Gender", "Part", "Category"};
+	static protected String[] colNames = {"English", "French", "Number", "Gender", "Part", "VerbNumber", "Category"};
 	private static final long serialVersionUID = 7754700570472658260L;
 
 	@Override
@@ -34,6 +35,8 @@ public class WordListTableModel extends DefaultTableModel{
 		case 4:
 			return item.part;
 		case 5:
+			return item.verbNumber;
+		case 6:
 			return item.category;
 		}
 		return null;
@@ -42,7 +45,7 @@ public class WordListTableModel extends DefaultTableModel{
 
 	public void addRow(Word word)
 	{
-		Object[] rowData = {word.english, word.french, word.number, word.gender, word.part, word.category};
+		Object[] rowData = {word.english, word.french, word.number, word.gender, word.part, word.verbNumber, word.category};
 		addRow(rowData);
 		m_wordList.add(word);
 		m_modified = true;
@@ -85,9 +88,12 @@ public class WordListTableModel extends DefaultTableModel{
 			item.gender = (Gender_t) value;
 			break;
 		case 4:
-			item.part = (SpeechPart) value;
+			item.part = (SpeechPart_t) value;
 			break;
 		case 5:
+			item.verbNumber = (VerbNumber_t) value;
+			break;
+		case 6:
 			item.category = (String) value;
 			break;
 		}

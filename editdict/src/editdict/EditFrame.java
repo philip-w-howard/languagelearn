@@ -89,9 +89,19 @@ public class EditFrame extends JFrame {
 		protected JRadioButton m_feminine;
 		protected JRadioButton m_noun;
 		protected JRadioButton m_verb;
+		protected JRadioButton m_je;
+		protected JRadioButton m_tu;
+		protected JRadioButton m_il;
+		protected JRadioButton m_elle;
+		protected JRadioButton m_nous;
+		protected JRadioButton m_vous;
+		protected JRadioButton m_ils;
+		protected JRadioButton m_elles;
+		
 		protected ButtonGroup numberGroup;
 		protected ButtonGroup genderGroup;
 		protected ButtonGroup partGroup;
+		protected ButtonGroup verbNumberGroup;
 		protected WordListTableModel m_model; 
 		protected JTable m_wordTable;
 		
@@ -237,7 +247,60 @@ public class EditFrame extends JFrame {
 			c.gridy = 4;
 			c.fill = GridBagConstraints.NONE;
 			c.weightx = 0;
+			c.anchor = GridBagConstraints.WEST;
+			c.gridwidth = 4;
+			JPanel verbPanel = new JPanel();
+			add(verbPanel, c);
+			
+			m_je = new JRadioButton("je");
+			m_je.addActionListener(my_editListener);
+			verbPanel.add(m_je);
+
+			m_tu = new JRadioButton("tu");
+			m_tu.addActionListener(my_editListener);
+			verbPanel.add(m_tu);
+
+			m_il = new JRadioButton("il");
+			m_il.addActionListener(my_editListener);
+			verbPanel.add(m_il);
+
+			m_elle = new JRadioButton("elle");
+			m_elle.addActionListener(my_editListener);
+			verbPanel.add(m_elle);
+
+			m_nous = new JRadioButton("nous");
+			m_nous.addActionListener(my_editListener);
+			verbPanel.add(m_nous);
+
+			m_vous = new JRadioButton("vous");
+			m_vous.addActionListener(my_editListener);
+			verbPanel.add(m_vous);
+
+			m_ils = new JRadioButton("ils");
+			m_ils.addActionListener(my_editListener);
+			verbPanel.add(m_ils);
+
+			m_elles = new JRadioButton("elles");
+			m_elles.addActionListener(my_editListener);
+			verbPanel.add(m_elles);
+
+			verbNumberGroup = new ButtonGroup();
+			verbNumberGroup.add(m_je);
+			verbNumberGroup.add(m_tu);
+			verbNumberGroup.add(m_il);
+			verbNumberGroup.add(m_elle);
+			verbNumberGroup.add(m_nous);
+			verbNumberGroup.add(m_vous);
+			verbNumberGroup.add(m_ils);
+			verbNumberGroup.add(m_elles);
+
+			//***************************************
+			c.gridx = 0;
+			c.gridy = 5;
+			c.fill = GridBagConstraints.NONE;
+			c.weightx = 0;
 			c.weighty = 0;
+			c.gridwidth = 1;
 			JButton add = new JButton("Add Row");
 			add.setMnemonic(java.awt.event.KeyEvent.VK_I);
 			add.addActionListener(new addRowListener()); 
@@ -245,7 +308,7 @@ public class EditFrame extends JFrame {
 			
 			//***************************************
 			c.gridx = 2;
-			c.gridy = 4;
+			c.gridy = 5;
 			c.fill = GridBagConstraints.NONE;
 			c.weightx = 0;
 			c.weighty = 0;
@@ -255,7 +318,7 @@ public class EditFrame extends JFrame {
 			
 			//** Data Table *************************************
 			c.gridx = 0;
-			c.gridy = 5;
+			c.gridy = 6;
 			c.fill = GridBagConstraints.BOTH;
 			c.weightx = 1;
 			c.weighty = 1;
@@ -285,6 +348,7 @@ public class EditFrame extends JFrame {
 			add(scrollPane, c);
 
 			//***************************************
+			// FIX THIS: this stuff should go in WordListTableModel thing
 			TableColumn numberColumn = m_wordTable.getColumnModel().getColumn(2);
 
 			JComboBox<Word.Number_t> numberBox = new JComboBox<Word.Number_t>();
@@ -305,12 +369,21 @@ public class EditFrame extends JFrame {
 			
 			TableColumn partColumn = m_wordTable.getColumnModel().getColumn(4);
 
-			JComboBox<Word.SpeechPart> partBox = new JComboBox<Word.SpeechPart>();
-			for (Word.SpeechPart part : Word.SpeechPart.values())
+			JComboBox<Word.SpeechPart_t> partBox = new JComboBox<Word.SpeechPart_t>();
+			for (Word.SpeechPart_t part : Word.SpeechPart_t.values())
 			{
 				partBox.addItem(part);
 			}
 			partColumn.setCellEditor(new DefaultCellEditor(partBox));
+
+			TableColumn verbNumberColumn = m_wordTable.getColumnModel().getColumn(5);
+
+			JComboBox<Word.VerbNumber_t> verbNumberBox = new JComboBox<Word.VerbNumber_t>();
+			for (Word.VerbNumber_t num : Word.VerbNumber_t.values())
+			{
+				verbNumberBox.addItem(num);
+			}
+			verbNumberColumn.setCellEditor(new DefaultCellEditor(verbNumberBox));
 		}
 		
 		protected class addRowListener implements ActionListener
@@ -366,11 +439,28 @@ public class EditFrame extends JFrame {
 					m_word.gender = Word.Gender_t.none;
 				
 				if (m_noun.isSelected())
-					m_word.part = Word.SpeechPart.noun;
+					m_word.part = Word.SpeechPart_t.noun;
 				else if (m_verb.isSelected())
-					m_word.part = Word.SpeechPart.verb;
+					m_word.part = Word.SpeechPart_t.verb;
 				else
-					m_word.part = Word.SpeechPart.none;
+					m_word.part = Word.SpeechPart_t.none;
+				
+				if (m_je.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.je;
+				else if (m_tu.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.tu;
+				else if (m_il.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.il;
+				else if (m_elle.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.elle;
+				else if (m_nous.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.nous;
+				else if (m_vous.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.vous;
+				else if (m_ils.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.ils;
+				else if (m_elles.isSelected())
+					m_word.verbNumber = Word.VerbNumber_t.elles;
 				
 				m_model.set(m_wordTable.getSelectedRow(), m_word);
 				repaint();
@@ -397,6 +487,7 @@ public class EditFrame extends JFrame {
 			numberGroup.clearSelection();
 			genderGroup.clearSelection();
 			partGroup.clearSelection();
+			verbNumberGroup.clearSelection();
 			
 			if (m_word.number == Word.Number_t.singular)
 				m_singular.setSelected(true);
@@ -408,10 +499,27 @@ public class EditFrame extends JFrame {
 			else if (m_word.gender == Word.Gender_t.feminine)
 				m_feminine.setSelected(true);
 			
-			if (m_word.part == Word.SpeechPart.noun)
+			if (m_word.part == Word.SpeechPart_t.noun)
 				m_noun.setSelected(true);
-			else if (m_word.part == Word.SpeechPart.verb)
+			else if (m_word.part == Word.SpeechPart_t.verb)
 				m_verb.setSelected(true);
+
+			if (m_word.verbNumber == Word.VerbNumber_t.je)
+				m_je.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.tu)
+				m_tu.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.il)
+				m_il.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.elle)
+				m_elle.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.nous)
+				m_nous.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.vous)
+				m_vous.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.ils)
+				m_ils.setSelected(true);
+			else if (m_word.verbNumber == Word.VerbNumber_t.elles)
+				m_elles.setSelected(true);
 
 			super.paintComponent(g);
 		}

@@ -18,43 +18,43 @@
 </meta>
 
 <wordlist>
-<word number="singular" gender="masculine" part="noun" category="pronoun">
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="pronoun">
 <english>he</english>
 <french>il</french>
 </word>
-<word number="singular" gender="feminine" part="noun" category="pronoun">
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="pronoun">
 <english>she</english>
 <french>elle</french>
 </word>
-<word number="plural" gender="masculine" part="noun" category="pronoun">
+<word number="plural" gender="masculine" part="noun" verbNumber="none" category="pronoun">
 <english>he</english>
 <french>ils</french>
 </word>
-<word number="plural" gender="masculine" part="noun" category="pronoun">
+<word number="plural" gender="masculine" part="noun" verbNumber="none" category="pronoun">
 <english>she</english>
 <french>ils</french>
 </word>
-<word number="singular" gender="feminine" part="noun" category="Unspecified">
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="Unspecified">
 <english>girl</english>
 <french>fille</french>
 </word>
-<word number="singular" gender="masculine" part="noun" category="Unspecified">
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
 <english>cat</english>
 <french>chat</french>
 </word>
-<word number="singular" gender="feminine" part="noun" category="food">
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="food">
 <english>orange</english>
 <french>orange</french>
 </word>
-<word number="singular" gender="feminine" part="noun" category="food">
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="food">
 <english>apple</english>
 <french>pomme</french>
 </word>
-<word number="singular" gender="feminine" part="verb" category="Unspecified">
+<word number="singular" gender="feminine" part="verb" verbNumber="elle" category="Unspecified">
 <english>read</english>
 <french>lit</french>
 </word>
-<word number="plural" gender="masculine" part="verb" category="Unspecified">
+<word number="plural" gender="masculine" part="verb" verbNumber="ils" category="Unspecified">
 <english>read</english>
 <french>lisent</french>
 </word>
