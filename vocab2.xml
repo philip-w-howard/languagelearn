@@ -97,18 +97,6 @@
 <nous>mangeons</nous>
 <vous>mangez</vous>
 </word>
-<word  part="noun" category="Unspecified">
-<english>apple</english>
-<plural></plural>
-<je></je>
-<tu></tu>
-<il></il>
-<elle>pomme</elle>
-<ils></ils>
-<elles></elles>
-<nous></nous>
-<vous></vous>
-</word>
 <word  part="verb" category="Unspecified">
 <english>have</english>
 <plural></plural>

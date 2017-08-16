@@ -37,7 +37,7 @@ public class EditFrame extends JFrame {
 	protected EditPanel m_editPanel;
 	public EditFrame(String filename)
 	{
-		setSize(600,400);
+		setSize(700,600);
 		setTitle("Language Word Editor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -98,9 +98,6 @@ public class EditFrame extends JFrame {
 		{
 			m_filename = filename;
 			
-			WordList wordList = new WordList();
-			wordList.load(m_filename);
-
 			editListener my_editListener = new editListener();
 			
 			GridBagLayout layout = new GridBagLayout();
@@ -367,8 +364,11 @@ public class EditFrame extends JFrame {
 			c.weighty = 1;
 			c.gridwidth = 4;
 
-			m_word = wordList.get(0);
+			WordList wordList = new WordList();
+			wordList.load(m_filename);
+
 			m_model = new WordListTableModel(wordList);
+			m_word = m_model.get(0);
 			m_wordTable = new JTable(m_model);
 			m_wordTable.setFillsViewportHeight(true);
 			m_wordTable.setAutoCreateRowSorter(true);
@@ -380,6 +380,7 @@ public class EditFrame extends JFrame {
 			m_wordTable.setSelectionModel(listSelectionModel);
 			
 			m_wordTable.setRowSelectionInterval(0, 0);
+			m_word = m_model.get(m_wordTable.convertRowIndexToModel(0));
 			
 			JScrollPane scrollPane = new JScrollPane(m_wordTable);
 			add(scrollPane, c);
@@ -402,7 +403,11 @@ public class EditFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Word newWord = new Word();
 				m_model.addRow(newWord);
-				m_wordTable.setRowSelectionInterval(m_model.getRowCount()-1, m_model.getRowCount()-1);
+
+				int row = m_model.getRowCount()-1;
+				row = m_wordTable. convertRowIndexToView(row);
+				
+				m_wordTable.setRowSelectionInterval(row, row);
 				m_english.requestFocus();
 				repaint();
 			}	
@@ -454,7 +459,7 @@ public class EditFrame extends JFrame {
 					m_word.part = Word.SpeechPart_t.none;
 				
 				
-				m_model.set(m_wordTable.getSelectedRow(), m_word);
+				m_model.set(m_wordTable.convertRowIndexToModel(m_wordTable.getSelectedRow()), m_word);
 				repaint();
 				System.out.println("Updated item");
 			}
@@ -507,7 +512,7 @@ public class EditFrame extends JFrame {
 					int maxIndex = lsm.getMaxSelectionIndex();
 					for (int i = minIndex; i <= maxIndex; i++) {
 						if (lsm.isSelectedIndex(i)) {
-							m_word = m_model.get(i);
+							m_word = m_model.get(m_wordTable.convertRowIndexToModel(i));
 							break;
 						}
 					}

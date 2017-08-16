@@ -1,16 +1,17 @@
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 public class WordListTableModel extends DefaultTableModel{
 	public WordListTableModel(WordList list)
 	{
-		super(colNames,list.size());
-		m_wordList = list;
+		//super(colNames,list.size());
+		super(colNames,0);
+		for (Word item : list)
+		{
+			addRow(item);
+		}
 	}
-	protected WordList m_wordList;
+	//protected WordList m_wordList;
 	protected Boolean m_modified = false;
 	public Word.SpeechPart_t part;
 
@@ -18,9 +19,10 @@ public class WordListTableModel extends DefaultTableModel{
 	
 	private static final long serialVersionUID = 7754700570472658260L;
 
+	/*
 	@Override
 	public Object getValueAt(int row, int col) {
-		Word item = m_wordList.get(row);
+		Word item = get(row);
 		switch (col)
 		{
 		case 0:
@@ -51,12 +53,11 @@ public class WordListTableModel extends DefaultTableModel{
 		return null;
 
 	}
-
+*/
 	public void addRow(Word word)
 	{
-		Object[] rowData = {word.english, word.plural, word.part, word.je, word.tu, word.elle, word.ils, word.elles, word.nous, word.vous, word.category};
+		Object[] rowData = {word.english, word.plural, word.part, word.je, word.tu, word.il, word.elle, word.ils, word.elles, word.nous, word.vous, word.category};
 		addRow(rowData);
-		m_wordList.add(word);
 		m_modified = true;
 	}
 	
@@ -81,7 +82,9 @@ public class WordListTableModel extends DefaultTableModel{
 	
 	@Override
     public void setValueAt(Object value, int row, int col) {
-		Word item = m_wordList.get(row);
+    	super.setValueAt(value, row, col);
+/*
+    	Word item = get(row);
 		switch (col)
 		{
 		case 0:
@@ -121,23 +124,53 @@ public class WordListTableModel extends DefaultTableModel{
 			item.category = (String) value;
 			break;
 		}
+	*/
 
 		m_modified = true;
 		fireTableCellUpdated(row, col);
     }
-
+	
 	public void save(String filename)
 	{
-		m_wordList.save(filename);
+		//m_wordList.save(filename);
 	}
 	
 	public void set(int index, Word word)
 	{
-		if (index >= 0)	m_wordList.set(index,  word);
+		if (index >= 0)	
+		{
+			setValueAt(word.english, index, 0);
+			setValueAt(word.plural, index, 1);
+			setValueAt(word.part, index, 2);
+			setValueAt(word.je, index, 3);
+			setValueAt(word.tu, index, 4);
+			setValueAt(word.il, index, 5);
+			setValueAt(word.elle, index, 6);
+			setValueAt(word.ils, index, 7);
+			setValueAt(word.elles, index, 8);
+			setValueAt(word.nous, index, 9);
+			setValueAt(word.vous, index, 10);
+			setValueAt(word.category, index, 11);		
+		}
 	}
+	
 	
 	public Word get(int index)
 	{
-		return m_wordList.get(index);
+		Word item = new Word();
+		item.english 	= (String) getValueAt(index, 0);
+		item.plural 	= (String) getValueAt(index, 1);
+		item.part 		= (Word.SpeechPart_t)getValueAt(index, 2);
+		item.je 		= (String) getValueAt(index, 3);
+		item.tu 		= (String) getValueAt(index, 4);
+		item.il 		= (String) getValueAt(index, 5);
+		item.elle 		= (String) getValueAt(index, 6);
+		item.ils 		= (String) getValueAt(index, 7);
+		item.elles 		= (String) getValueAt(index, 8);
+		item.nous 		= (String) getValueAt(index, 9);
+		item.vous 		= (String) getValueAt(index, 10);
+		item.category 	= (String) getValueAt(index, 11);
+
+		return item;
 	}
 }
