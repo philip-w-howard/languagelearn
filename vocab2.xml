@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+<wordlist>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="pronoun">
+<english>he</english>
+<french>il</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="pronoun">
+<english>she</english>
+<french>elle</french>
+</word>
+<word number="plural" gender="masculine" part="noun" verbNumber="none" category="pronoun">
+<english>he</english>
+<french>ils</french>
+</word>
+<word number="plural" gender="masculine" part="noun" verbNumber="none" category="pronoun">
+<english>she</english>
+<french>ils</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="Unspecified">
+<english>girl</english>
+<french>fille</french>
+</word>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>cat</english>
+<french>chat</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="food">
+<english>orange</english>
+<french>orange</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="food">
+<english>apple</english>
+<french>pomme</french>
+</word>
+<word number="singular" gender="feminine" part="verb" verbNumber="elle" category="Unspecified">
+<english>read</english>
+<french>lit</french>
+</word>
+<word number="plural" gender="masculine" part="verb" verbNumber="ils" category="Unspecified">
+<english>read</english>
+<french>lisent</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="vous" category="Unspecified">
+<english>eat</english>
+<french>mangez</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="nous" category="Unspecified">
+<english>eat</english>
+<french>mangeons</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="Unspecified">
+<english>apple</english>
+<french>pomme</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="vous" category="Unspecified">
+<english>have</english>
+<french>avez</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="nous" category="Unspecified">
+<english>have</english>
+<french>avons</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="il" category="Unspecified">
+<english>are</english>
+<french>est</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="elle" category="Unspecified">
+<english>are</english>
+<french>est</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="ils" category="Unspecified">
+<english>are</english>
+<french>sont</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="elles" category="Unspecified">
+<english>are</english>
+<french>sont</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="vous" category="Unspecified">
+<english>are</english>
+<french>êtes</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="nous" category="Unspecified">
+<english>are</english>
+<french>sommes</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="ils" category="Unspecified">
+<english>write</english>
+<french>écrivent</french>
+</word>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>newspaper</english>
+<french>journal</french>
+</word>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>menu</english>
+<french>menu</french>
+</word>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>book</english>
+<french>livre</french>
+</word>
+<word number="plural" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>book</english>
+<french>livres</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="color">
+<english>black</english>
+<french>noir</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="color">
+<english>blue</english>
+<french>bleu</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="color">
+<english>white</english>
+<french>blanc</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="color">
+<english>vert</english>
+<french>green</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="color">
+<english>yellow</english>
+<french>jaune</french>
+</word>
+<word number="singular" gender="feminine" part="none" verbNumber="none" category="color">
+<english>red</english>
+<french>rouge</french>
+</word>
+<word number="plural" gender="feminine" part="none" verbNumber="none" category="color">
+<english>red</english>
+<french>rouges</french>
+</word>
+<word number="singular" gender="masculine" part="none" verbNumber="none" category="Unspecified">
+<english>rich</english>
+<french>riche</french>
+</word>
+<word number="plural" gender="masculine" part="none" verbNumber="none" category="Unspecified">
+<english>rich</english>
+<french>riches</french>
+</word>
+<word number="singular" gender="masculine" part="none" verbNumber="none" category="Unspecified">
+<english>calm</english>
+<french>calme</french>
+</word>
+<word number="plural" gender="masculine" part="none" verbNumber="none" category="Unspecified">
+<english>calm</english>
+<french>calmes</french>
+</word>
+<word number="singular" gender="masculine" part="none" verbNumber="none" category="Unspecified">
+<english>his</english>
+<french>son</french>
+</word>
+<word number="plural" gender="feminine" part="none" verbNumber="none" category="Unspecified">
+<english>hers</english>
+<french>sa</french>
+</word>
+<word number="plural" gender="masculine" part="none" verbNumber="none" category="Unspecified">
+<english>theirs</english>
+<french>leur</french>
+</word>
+<word number="plural" gender="feminine" part="none" verbNumber="none" category="Unspecified">
+<english>theirs</english>
+<french>leur</french>
+</word>
+<word number="none" gender="none" part="verb" verbNumber="none" category="Unspecified">
+<english>play</english>
+<french>jouent</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>those are</english>
+<french>ce sont</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>it is</english>
+<french>c'est</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>made</english>
+<french>faites</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="Unspecified">
+<english>mother</english>
+<french>mère</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>father</english>
+<french>pére</french>
+</word>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>son</english>
+<french>fils</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="Unspecified">
+<english>daughter</english>
+<french>fille</french>
+</word>
+<word number="singular" gender="masculine" part="noun" verbNumber="none" category="Unspecified">
+<english>husband</english>
+<french>mari</french>
+</word>
+<word number="singular" gender="feminine" part="noun" verbNumber="none" category="Unspecified">
+<english>wife</english>
+<french>femme</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>house</english>
+<french>maison</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>apartment</english>
+<french>appartement</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>computer</english>
+<french>ordinateur</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>in</english>
+<french>dans</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>on</english>
+<french>sur</french>
+</word>
+<word number="none" gender="none" part="none" verbNumber="none" category="Unspecified">
+<english>under</english>
+<french>sour</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>shoe</english>
+<french>chaussure</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>window</english>
+<french>fenêtre</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>sink</english>
+<french>évier</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>living room</english>
+<french>salon</french>
+</word>
+<word number="none" gender="none" part="noun" verbNumber="none" category="Unspecified">
+<english>kitchen</english>
+<french>cuisine</french>
+</word>
+</wordlist>
+
+</dictionary>
