@@ -10,6 +10,7 @@ public class EditDict {
 		dict.load(filename);
 		
 		System.out.println(dict);
+		dict.save(filename);
 
 	}
 

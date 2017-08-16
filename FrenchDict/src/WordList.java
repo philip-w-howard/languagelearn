@@ -84,6 +84,30 @@ public class WordList extends Vector<Word>{
 					item = eElement.getElementsByTagName("plural");
 					if (item != null && item.item(0) != null) plural = item.item(0).getTextContent();
 
+					item = eElement.getElementsByTagName("je");
+					if (item != null && item.item(0) != null) je = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("tu");
+					if (item != null && item.item(0) != null) tu = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("il");
+					if (item != null && item.item(0) != null) il = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("elle");
+					if (item != null && item.item(0) != null) elle = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("ils");
+					if (item != null && item.item(0) != null) ils = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("elles");
+					if (item != null && item.item(0) != null) elles = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("nous");
+					if (item != null && item.item(0) != null) nous = item.item(0).getTextContent();
+
+					item = eElement.getElementsByTagName("vous");
+					if (item != null && item.item(0) != null) vous = item.item(0).getTextContent();
+
 					Word word = new Word(
 							eElement.getElementsByTagName("english").item(0).getTextContent(),
 							plural,
